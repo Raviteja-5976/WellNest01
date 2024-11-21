@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WellNest</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="{{ url_for('index') }}" class="text-xl font-bold text-gray-800">WellNest</a>
+                
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700 hover:text-gray-900">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                <!-- Desktop menu -->
+                <ul class="hidden md:flex space-x-4">
+                    <li><a href="#" class="text-gray-700 hover:text-gray-900">Tests</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-gray-900">Tips</a></li>
+                    <li><a href="#" class="text-gray-700 hover:text-gray-900">Profile</a></li>
+                    {% if session.get('user') %}
+                        <li class="text-gray-700">Welcome, {{ session.get('user') }}</li>
+                        <li><a href="{{ url_for('auth.logout') }}" class="text-gray-700 hover:text-gray-900">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('auth.login') }}" class="text-gray-700 hover:text-gray-900">Login</a></li>
+                        <li><a href="{{ url_for('auth.register') }}" class="text-gray-700 hover:text-gray-900">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <ul class="flex flex-col space-y-2">
+                    <li><a href="#" class="block text-gray-700 hover:text-gray-900">Tests</a></li>
+                    <li><a href="#" class="block text-gray-700 hover:text-gray-900">Tips</a></li>
+                    <li><a href="#" class="block text-gray-700 hover:text-gray-900">Profile</a></li>
+                    {% if session.get('user') %}
+                        <li class="text-gray-700">Welcome, {{ session.get('user') }}</li>
+                        <li><a href="{{ url_for('auth.logout') }}" class="block text-gray-700 hover:text-gray-900">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('auth.login') }}" class="block text-gray-700 hover:text-gray-900">Login</a></li>
+                        <li><a href="{{ url_for('auth.register') }}" class="block text-gray-700 hover:text-gray-900">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto px-4 py-8">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Add JavaScript for mobile menu toggle -->
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
