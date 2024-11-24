@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2 class="h4 mb-0">Test Results</h2>
+        </div>
+        <div class="card-body">
+            <h3 class="h5 mb-3">{{ category }} - {{ test_exam }}</h3>
+            <p class="mb-2"><strong>Raw Score:</strong> {{ result[0] }}</p>
+            <p class="mb-2"><strong>T-Score:</strong> {{ result[1] }}</p>
+            <hr>
+            <div class="mt-4">
+                <a href="{{ url_for('test_routes.test_pid') }}" class="btn btn-primary me-2">Take Another Test</a>
+                <a href="{{ url_for('index') }}" class="btn btn-secondary">Return Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

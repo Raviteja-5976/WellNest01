@@ -1,6 +1,8 @@
 import sqlite3
 from flask import render_template, url_for, session, request, redirect, Blueprint, flash
 from datetime import timedelta
+from models.authentication import user_db
+from models.authentication.user_db import get_db_connection
 
 auth = Blueprint('auth', __name__, template_folder='templates')
 
@@ -44,27 +46,26 @@ def register():
             'age': request.form['age'],
             'gender': request.form['gender'],
             'email': request.form['email'],
-            'phone': request.form['phone'],
-            'address': request.form['address'],
-            'city': request.form['city'],
-            'state': request.form['state'],
-            'zip': request.form['zip'],
-            'country': request.form['country']
+            'profession': request.form['profession']
         }
-        conn = sqlite3.connect('wellnest01.db')
-        cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO users (username, password, Name, Age, gender, email, phone, address, city, state, zip, country)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (
-            data['username'], data['password'], data['name'], data['age'], data['gender'], 
-            data['email'], data['phone'], data['address'], data['city'], data['state'], 
-            data['zip'], data['country']
-        ))
-        conn.commit()
-        flash('Registration successful! Please login.', 'success')
-        conn.close()
-        return redirect(url_for('auth.login'))
+        try:
+            with get_db_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute('''
+                    INSERT INTO users (username, password, Name, Age, gender, email, Profession)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                ''', (
+                    data['username'], data['password'], data['name'], data['age'],
+                    data['gender'], data['email'], data['profession']
+                ))
+                user_db.user_test_info(data['username'], conn)   # Pass conn to the function
+                user_db.user_test_result(data['username'], conn) # Pass conn to the function
+                flash('Registration successful! Please login.', 'success')
+                return redirect(url_for('auth.login'))
+        except sqlite3.Error as e:
+            flash(f'Registration error: {str(e)}', 'error')
+            return render_template('register.html')
+            
     return render_template('register.html')
 
 

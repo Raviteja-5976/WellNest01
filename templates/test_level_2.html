@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 2</title>
+    <style>
+        body {
+            font-size: 18px;
+            text-align: center;
+        }
+        .question-container {
+            margin: 20px auto;
+            width: 60%;
+            text-align: left;
+        }
+        .submit-button {
+            background-color: #295ad7;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            font-size: 32px;
+            border-radius: 20px;
+        }
+        .submit-button:hover {
+            background-color: #213186;
+        }
+    </style>
+</head>
+<body>
+    {% extends "base.html" %}
+    {% block content %}
+    <div class="container mt-5">
+        <h2 class="mb-4">{{ category }} - {{ test_exam }}</h2>
+        <form method="POST">
+            {% for question in data %}
+            <div class="mb-3">
+                <p class="mb-2">{{ question.Question }}</p>
+                <div class="btn-group d-flex" role="group">
+                    {% for i in range(1, 6) %}
+                    <input type="radio" class="btn-check" name="q{{ question.Qno }}" value="{{ i }}" id="q{{ question.Qno }}_{{ i }}" required>
+                    <label class="btn btn-outline-primary flex-grow-1" for="q{{ question.Qno }}_{{ i }}">
+                        {% if i == 1 %}Never
+                        {% elif i == 2 %}Rarely
+                        {% elif i == 3 %}Sometimes
+                        {% elif i == 4 %}Often
+                        {% else %}Always
+                        {% endif %}
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary w-100 mt-4">Submit</button>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+</html>

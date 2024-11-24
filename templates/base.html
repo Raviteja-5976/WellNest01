@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WellNest</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
     <nav class="bg-white shadow-md">
@@ -21,7 +23,7 @@
 
                 <!-- Desktop menu -->
                 <ul class="hidden md:flex space-x-4">
-                    <li><a href="#" class="text-gray-700 hover:text-gray-900">Tests</a></li>
+                    <li><a href="{{ url_for('test_view.test_main') }}" class="text-gray-700 hover:text-gray-900">Tests</a></li>
                     <li><a href="#" class="text-gray-700 hover:text-gray-900">Tips</a></li>
                     <li><a href="#" class="text-gray-700 hover:text-gray-900">Profile</a></li>
                     {% if session.get('user') %}
@@ -37,7 +39,7 @@
             <!-- Mobile menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4">
                 <ul class="flex flex-col space-y-2">
-                    <li><a href="#" class="block text-gray-700 hover:text-gray-900">Tests</a></li>
+                    <li><a href="{{ url_for('test_view.test_main') }}" class="block text-gray-700 hover:text-gray-900">Tests</a></li>
                     <li><a href="#" class="block text-gray-700 hover:text-gray-900">Tips</a></li>
                     <li><a href="#" class="block text-gray-700 hover:text-gray-900">Profile</a></li>
                     {% if session.get('user') %}
@@ -64,5 +66,7 @@
             mobileMenu.classList.toggle('hidden');
         });
     </script>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

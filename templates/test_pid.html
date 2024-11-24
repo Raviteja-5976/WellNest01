@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Personality Inventory</title>
+    <style>
+        body {
+            font-size: 18px;
+            text-align: center;
+        }
+        .question-container {
+            margin: 20px auto;
+            width: 60%;
+            text-align: left;
+        }
+        .submit-button {
+            background-color: #295ad7;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            font-size: 32px;
+            border-radius: 20px;
+        }
+        .submit-button:hover {
+            background-color: #213186;
+        }
+    </style>
+</head>
+<body>
+    <form action="{{ url_for('test_routes.test_pid') }}" method="post">
+        {% for question in data %}
+            <div class="question-container">
+                <p>Question {{ question['Qno'] }}</p>
+                <p>{{ question['Question'] }}</p>
+                <label>
+                    <input type="radio" name="q{{ question['Qno'] }}" value="0" required>
+                    Very False or Often False
+                </label><br>
+                <label>
+                    <input type="radio" name="q{{ question['Qno'] }}" value="1">
+                    Sometimes or Somewhat False
+                </label><br>
+                <label>
+                    <input type="radio" name="q{{ question['Qno'] }}" value="2">
+                    Sometimes or Somewhat True
+                </label><br>
+                <label>
+                    <input type="radio" name="q{{ question['Qno'] }}" value="3">
+                    Very True or Often True
+                </label>
+                <p>_________________________________________________________________________________________________________</p>
+            </div>
+        {% endfor %}
+        <input type="submit" value="Submit" class="submit-button">
+    </form>
+</body>
+</html>

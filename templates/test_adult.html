@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container mt-5">
+        <!-- Personality Inventory Dropdown -->
+        <div class="dropdown mb-4">
+            <button class="btn btn-primary w-100 h-20 text-xl font-bold" type="button" id="personalityDropdown" ><a href="{{ url_for('test_routes.test_pid') }}">PERSONALITY INVENTORY</a></button>
+            <!-- <ul class="dropdown-menu w-100">
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Personality Assessment Test ADULT</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Personality Assessment Test CHILD</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Personality Assessment Test PARENT</a></li>
+            </ul> -->
+        </div>
+
+        <!-- Level 1 Dropdown -->
+        <div class="dropdown mb-4">
+            <button class="btn btn-primary w-100 h-20 text-xl font-bold" type="button" id="level1Dropdown">
+                LEVEL 1
+            </button>
+            <!-- <ul class="dropdown-menu w-100">
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Basic Mental Health Screening</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Initial Assessment Form</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Preliminary Evaluation</a></li>
+            </ul> -->
+        </div>
+
+        <!-- Level 2 Dropdown -->
+        <div class="dropdown mb-4">
+            <button class="btn btn-primary dropdown-toggle w-100 h-20 text-xl font-bold" type="button" id="level2Dropdown" data-bs-toggle="dropdown">
+                LEVEL 2
+            </button>
+            <ul class="dropdown-menu w-100">
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="{{ url_for('test_routes.level_2', category='ADULT', test_exam='ANGER') }}">Anger</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="{{ url_for('test_routes.level_2', category='ADULT', test_exam='ANXIETY') }}">Anxiety</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="{{ url_for('test_routes.level_2', category='ADULT', test_exam='DEPRESSION') }}">Depression</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="{{ url_for('test_routes.level_2_mania', category='ADULT', test_exam='MANIA') }}">Mania</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="{{ url_for('test_routes.level_2_rt_b', category='ADULT', test_exam='RT_B') }}">Repetitive Thoughts And Behaviour</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="{{ url_for('test_routes.level_2_sd', category='ADULT', test_exam='SD') }}">Sleep Disturbance</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="{{ url_for('test_routes.level_2_ss', category='ADULT', test_exam='SS') }}">Somatic Symptoms</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="{{ url_for('test_routes.level_2_su', category='ADULT', test_exam='SU') }}">Substance Use</a></li>
+            </ul>
+        </div>
+
+        <!-- Disorder Specific Dropdown -->
+        <div class="dropdown mb-4">
+            <button class="btn btn-primary dropdown-toggle w-100 h-20 text-xl font-bold" type="button" id="disorderDropdown" data-bs-toggle="dropdown">
+                DISORDER SPECIFIC
+            </button>
+            <ul class="dropdown-menu w-100">
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Agrophobia</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Depression</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Dissociative Symptoms</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Generalized Anxiety Disorder</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Panic Disorder</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Panic Disorder</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Post Traumatic Stress Disorder (PTSD)</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Social Anxiety Disorder</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Specific Phobia</a></li>
+                <li><a class="dropdown-item h-10 text-lg font-semibold" href="#">Acute Stress Symptoms</a></li>
+            
+            </ul>
+        </div>
+    </div>
+{% endblock %}
